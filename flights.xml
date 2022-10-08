@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="3dce91c7-a4c4-4221-82e2-4d4ba8ce9c91" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="eb97746d-def7-4559-b1cd-e63b83b2b685" >
+		<http:request-connection host="mu.mulesoft-training.com" port="80" />
+	</http:request-config>
+	<flow name="flightsflow" doc:id="ff050ab9-7d40-499c-8ce9-4f038947c795" >
+		<http:listener doc:name="Listener" doc:id="da268d50-ae9b-4916-ba60-92fa2b02fe71" config-ref="HTTP_Listener_config" path="/flights"/>
+		<logger level="INFO" doc:name="API started for flights retrieval" doc:id="9bedf76c-b493-4f9e-9ad2-22049094f542" message="API started for flights retrieval"/>
+		<http:request method="GET" doc:name="Request to Flights api" doc:id="416d390d-ba1c-4b7d-a6ee-a08425800311" config-ref="HTTP_Request_configuration" path="#['/essentials/united/flights/' ++ payload.destination]"/>
+		<ee:transform doc:name="payload" doc:id="2fb29ec6-048c-41bd-a25b-6357e9001941" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="payload" doc:id="c8f0db9d-48db-4368-a467-f602db824469" message="#[payload]"/>
+	</flow>
+</mule>
