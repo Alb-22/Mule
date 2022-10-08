@@ -70,5 +70,5 @@ void main() {
    }
    
 
-    printf("Output:%d", sum);
+    printf("Savings:%d", sum);
 }
