@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	</http:listener-config>
 	<flow name="hellowordFlow" doc:id="75b5f494-128c-4386-a54e-1ea024843429" >
 		<http:listener doc:name="Listener" doc:id="c605b798-ab70-4035-ad5a-987ab2015ef7" config-ref="HTTP_Listener_config" path="/helloworld"/>
-		<set-payload value='#["Hello World!"]' doc:name="Set Payload" doc:id="534793ba-8786-4c22-885d-947a55c8926a" />
+		<set-payload value='#["Hello Github!"]' doc:name="Set Payload" doc:id="534793ba-8786-4c22-885d-947a55c8926a" />
 		<logger level="INFO" doc:name="Logger" doc:id="819281e7-ae4d-478c-84f7-11e0406b6655" message='#["Hello Github!"]'/>
 	</flow>
 </mule>
