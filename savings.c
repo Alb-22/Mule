@@ -3,7 +3,7 @@
 void main() {
     
    int n,j=0,i=0,sum=0,k,week=0;
-   printf("Enter the number of days of savings:");
+   printf("Enter the number of days of savings we are considering:");
    scanf("%d",&n);
    if(n<=5)
    {
